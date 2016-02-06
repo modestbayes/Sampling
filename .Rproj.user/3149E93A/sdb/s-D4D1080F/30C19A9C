@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(ggplot2)\n\nshinyServer(function(input, output, session) {\n  \n  # Read file\n  #goodstuff <- read.csv(\"http://www.ics.uci.edu/~staceyah/7/data/sats98.csv\")\n  goodstuff <- fetalbf\n    \n  # Data table\n  output$table <- renderDataTable(goodstuff, options = list(\n    lengthMenu = list(c(10, 25, 50), c('10', '25', '50')),\n    pageLength = 10,\n    searching = FALSE\n  ))\n  \n  # Summary stats\n  output$summary <- renderPrint(\n    summary(goodstuff)\n  )\n  \n  # Histogram variable selection\n  output$histx <- renderUI({\n    items=names(goodstuff)\n    selectInput(\"histx\", \"Variable\",items)\n  })\n  \n  # Histogram\n  output$hist <- renderPlot({\n    name <- toString(input$histx)\n    qplot(goodstuff[,name], binwidth = input$bin,fill=I(\"#009E73\"),\n          colour=I(\"white\"), geom=\"histogram\",\n          xlab=name)\n  })\n  \n  # Boxplot variable selection\n  output$boxx <- renderUI({\n    items=c(1,names(goodstuff))\n    selectInput(\"boxx\", \"X Variable\",items)\n  })\n  \n  output$boxy <- renderUI({\n    items=names(goodstuff)\n    selectInput(\"boxy\", \"Y Variable\",items)\n  })\n  \n  # Boxplot\n  output$box <- renderPlot({\n    p1 <- ggplot(data=goodstuff, aes_string(x=input$boxx,y=input$boxy))\n    p1 + geom_boxplot(fill=I(\"#009E73\"))\n  })\n  \n  # Scatterplot variable selections\n  output$scatterx <- renderUI({\n    items=names(goodstuff)\n    selectInput(\"scatterx\", \"X Variable\",items)\n  })\n  \n  output$scattery <- renderUI({\n    items=names(goodstuff)\n    selectInput(\"scattery\", \"Y Variable\",items)\n  })\n  \n  # Scatterplot\n  output$scatter <- renderPlot({\n    p1 <- ggplot(goodstuff, aes_string(x = input$scatterx, y = input$scattery))\n    p1 + geom_point(color=\"red\", size = 4)\n  })\n  \n})",
+    "created" : 1454726574682.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "328355361",
+    "id" : "30C19A9C",
+    "lastKnownWriteTime" : 1454726600,
+    "path" : "~/EDA/server.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

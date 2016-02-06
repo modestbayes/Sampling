@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(ggplot2)\n\nshinyServer(function(input, output) {\n\n  output$index <- renderUI({\n    n = as.numeric(input$number)\n    sliderInput(\"n\", \"\",\n                min = 1, max = n, value = 1, step = 1)\n  })\n  \n  v <- reactiveValues(data = NULL)\n  \n  observeEvent(input$sample, {\n    m <- as.numeric(input$number)\n    n <- as.numeric(input$size)\n    A <- matrix( nrow=m, ncol=n) \n    for (i in 1:m) {\n      A[i,] <- rnorm( n, mean = 0, sd = 4 )\n    }\n    v$data <- A\n    output$plot1 <- renderPlot({\n      if (is.null(v$data)) return()\n      i <- as.numeric(input$n)\n      a <- v$data[i,]\n      b <- data.frame(a)\n      ggplot(b, aes(x=a)) +\n        geom_histogram(fill=I(\"#009E73\"),colour=I(\"white\"),binwidth=1) +\n        geom_vline(xintercept=mean(a),   # Ignore NA values for mean\n                   color=\"red\", linetype=\"dashed\", size=1) +\n        labs(title=\"Histogram of current sample\") +\n        labs(x=\"X\", y=\"Count\")\n      \n    })\n    output$plot2 <- renderPlot({\n      if (is.null(v$data)) return()\n      i <- as.numeric(input$n)\n      M <- apply(v$data, 1, mean)\n      b <- data.frame(M)\n      ggplot(b, aes(x=M)) +\n        geom_histogram(fill=I(\"#009E73\"),colour=I(\"white\"), binwidth=0.2) +\n        geom_vline(xintercept=M[i],   # Ignore NA values for mean\n                   color=\"red\", linetype=\"dashed\", size=1) +\n        labs(title=\"Histogram of sample means\") +\n        labs(x=\"X\", y=\"Count\")\n    })\n  })\n\n})\n",
+    "created" : 1454726543095.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "614570999",
+    "id" : "97AD5E22",
+    "lastKnownWriteTime" : 1454735618,
+    "path" : "~/Sampling/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

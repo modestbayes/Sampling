@@ -1,0 +1,17 @@
+{
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(shinythemes)\n\n\nshinyUI(fluidPage(\n  theme = shinytheme(\"readable\"),\n  \n  fluidRow(\n    column(width = 8,\n           h4('Sampling Visualization'),\n           h4(\"\"),\n           column(width = 6,\n                  numericInput(\"size\", label = \"Sample Size\", value = 1),\n                  offset = 0),\n           column(width = 6,\n                  numericInput(\"number\", label = \"Number of Samples\", value = 10),\n                  offset = 0),\n           column(width = 6,\n                  actionButton(\"sample\", \"Generate random samples\"),\n                  uiOutput(\"index\"),\n                  offset = 3),\n           offset = 2)\n\n  ),\n  fluidRow(\n    column(width = 8,\n           plotOutput(\"plot1\"),\n           plotOutput(\"plot2\"),\n           offset = 2)\n  )\n)\n)\n",
+    "created" : 1454726542119.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3549496053",
+    "id" : "12E09A6E",
+    "lastKnownWriteTime" : 1454735566,
+    "path" : "~/Sampling/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

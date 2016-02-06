@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(shinythemes)\n\n# Define UI for application that draws a histogram\nshinyUI(fluidPage(\n  theme = shinytheme(\"readable\"),\n  # Application title\n  fluidRow(\n  column(width = 8,\n         h4('Exploratory Data Analysis'),\n         tabsetPanel(type = \"tabs\", \n                     tabPanel(\"Dataset\",\n                              h4(\"\"),\n                              dataTableOutput('table')),\n                     tabPanel(\"Summary\", \n                              h4(\"\"),\n                              verbatimTextOutput(\"summary\")),\n                     tabPanel(\"Histogram\", \n                              h4(\"\"),\n                              uiOutput(\"histx\"),\n                              numericInput(\"bin\", label = \"Bin width\", value = 1),\n                              plotOutput(\"hist\")),\n                     tabPanel(\"Boxplot\", \n                              h4(\"\"),\n                              uiOutput(\"boxx\"),\n                              uiOutput(\"boxy\"),\n                              plotOutput(\"box\")),\n                     tabPanel(\"Scatterplot\", \n                              h4(\"\"),\n                              uiOutput(\"scatterx\"),\n                              uiOutput(\"scattery\"),\n                              plotOutput(\"scatter\")) \n         )\n         , offset = 2)\n  )\n))",
+    "created" : 1454726581672.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3765389015",
+    "id" : "FE28F791",
+    "lastKnownWriteTime" : 1454726596,
+    "path" : "~/EDA/ui.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
