@@ -19,22 +19,48 @@ shinyUI(fluidPage(
            "This app is intended to help you understand the sampling distribution of the sample mean.
            You shall experiment with different sample sizes and numbers of samples. Here the samples
            follow a Normal distribution with mean of 0 and standard deviation of 4.",
-           h4(""),
-           column(width = 6,
-                  numericInput("size", label = "Sample Size", value = 10),
-                  offset = 0),
-           column(width = 6,
-                  numericInput("number", label = "Number of Samples", value = 2),
-                  offset = 0),
-           column(width = 6,
-                  actionButton("sample", "Generate random samples"),
-                  h4(""),
-                  "Slide to switch samples",
-                  uiOutput("index"),
-                  offset = 3),
            offset = 2)
-
   ),
+  fluidRow(
+    column(width = 8,
+           column(width = 4,
+                  selectInput("dist", label = "Distribution", 
+                              choices = c("Normal", "Binomial", "Chi-squared", "Exponential"), 
+                              selected = "Normal"),
+                  offset = 0),
+           column(width = 4,
+                  uiOutput("p1"),
+                  offset = 0),
+           column(width = 4,
+                  uiOutput("p2"),
+                  offset = 0),
+           offset = 2)
+  ),
+  fluidRow(
+    column(width = 8,
+           column(width = 4,
+                  numericInput("size", label = "Sample Size", value = 30),
+                  offset = 0),
+           column(width = 4,
+                  numericInput("number", label = "Number of Samples", value = 10),
+                  offset = 0),
+           column(width = 4,
+                  uiOutput("index"),
+                  offset = 0),
+           offset = 2)
+  ),
+  
+  fluidRow(
+    column(width = 8,
+           column(width = 4,
+                  actionButton("sample", "Generate Samples"),
+                  offset = 4),
+           column(width = 4,
+                  checkboxInput("align", label = "Align Axes", value = TRUE),
+                  offset = 0),
+           offset = 2)
+  ),
+  
   fluidRow(
     column(width = 8,
            textOutput("guide1"),
