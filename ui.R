@@ -17,8 +17,7 @@ shinyUI(fluidPage(
            h4('Sampling Distribution Visualization'),
            h4(""),
            "This app is intended to help you understand the sampling distribution of the sample mean.
-           You shall experiment with different sample sizes and numbers of samples. Here the samples
-           follow a Normal distribution with mean of 0 and standard deviation of 4.",
+           You shall experiment with different sample sizes and numbers of samples.",
            offset = 2)
   ),
   fluidRow(
